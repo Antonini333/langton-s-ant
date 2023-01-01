@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 const AntGame = () => {
 
     const ANTUP = 0;
@@ -87,6 +89,13 @@ const AntGame = () => {
         var moves = document.getElementById('moves');
         moves.innerHTML = grid.moves;
     }
+
+    useEffect(() => {
+        let canvas = document.getElementById('grid');
+        grid = { ...grid, width: canvas.width, height: canvas.height }
+        init(grid);
+        setInterval(moveAnt, 1000 / 13, grid);
+    }, []);
 
     return (
         <>
