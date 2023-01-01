@@ -30,6 +30,28 @@ const AntGame = () => {
         }
     }
 
+    const move = (grid) => {
+        let canvas = document.getElementById('grid');
+        let ctx = canvas.getContext('2d');
+        for (let i = 0; i < 100; i++) {
+            let cell = grid.cells[grid.ant.x][grid.ant.y];
+            if (cell.alive) {
+                grid.cells[grid.ant.x][grid.ant.y].alive = false;
+                ctx.fillStyle = "white";
+                ctx.fillRect(grid.ant.x, grid.ant.y, 1, 1);
+            
+            } else {
+                grid.cells[grid.ant.x][grid.ant.y].alive = true;
+                ctx.fillStyle = "black";
+                ctx.fillRect(grid.ant.x, grid.ant.y, 1, 1);
+              
+            }
+            ctx.fillStyle = 'red';
+            ctx.fillRect(grid.ant.x, grid.ant.y, 1, 1);
+            grid.moves++;
+        }
+    }
+
     return (
         <>
         <canvas id="grid" width="500" height="500"></canvas>
