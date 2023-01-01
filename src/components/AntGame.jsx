@@ -30,6 +30,14 @@ const AntGame = () => {
         }
     }
 
+    const rotateRight = (grid) => {
+        grid.ant.direction = ((grid.ant.direction + 1) + (ANTLEFT + 1)) % (ANTLEFT + 1);
+    }
+
+    const rotateLeft = (grid) => {
+        grid.ant.direction = ((grid.ant.direction - 1) + (ANTLEFT + 1)) % (ANTLEFT + 1);
+    }
+
     const move = (grid) => {
         let canvas = document.getElementById('grid');
         let ctx = canvas.getContext('2d');
@@ -39,11 +47,13 @@ const AntGame = () => {
                 grid.cells[grid.ant.x][grid.ant.y].alive = false;
                 ctx.fillStyle = "white";
                 ctx.fillRect(grid.ant.x, grid.ant.y, 1, 1);
-            
+                rotateRight(grid);
+                
             } else {
                 grid.cells[grid.ant.x][grid.ant.y].alive = true;
                 ctx.fillStyle = "black";
                 ctx.fillRect(grid.ant.x, grid.ant.y, 1, 1);
+                rotateLeft(grid);
               
             }
             ctx.fillStyle = 'red';
