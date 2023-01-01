@@ -79,6 +79,15 @@ const AntGame = () => {
         }
     }
 
+    const moveAnt = (grid) => {
+        let canvas = document.getElementById('grid');
+        let ctx = canvas.getContext('2d');
+        move(grid);
+        ctx.stroke();
+        var moves = document.getElementById('moves');
+        moves.innerHTML = grid.moves;
+    }
+
     return (
         <>
         <canvas id="grid" width="500" height="500"></canvas>
