@@ -38,6 +38,23 @@ const AntGame = () => {
         grid.ant.direction = ((grid.ant.direction - 1) + (ANTLEFT + 1)) % (ANTLEFT + 1);
     }
 
+    const moveForward = (grid) => {
+        switch (grid.ant.direction) {
+            case ANTUP:
+                grid.ant.x = ((grid.ant.x - 1) + grid.width) % grid.width;
+                break;
+            case ANTRIGHT:
+                grid.ant.y = ((grid.ant.y + 1) + grid.height) % grid.height;
+                break;
+            case ANTDOWN:
+                grid.ant.x = ((grid.ant.x + 1) + grid.width) % grid.width;
+                break;
+            case ANTLEFT:
+                grid.ant.y = ((grid.ant.y - 1) + grid.height) % grid.height;
+                break;
+        }
+    }
+
     const move = (grid) => {
         let canvas = document.getElementById('grid');
         let ctx = canvas.getContext('2d');
@@ -48,13 +65,13 @@ const AntGame = () => {
                 ctx.fillStyle = "white";
                 ctx.fillRect(grid.ant.x, grid.ant.y, 1, 1);
                 rotateRight(grid);
-                
+                moveForward(grid);
             } else {
                 grid.cells[grid.ant.x][grid.ant.y].alive = true;
                 ctx.fillStyle = "black";
                 ctx.fillRect(grid.ant.x, grid.ant.y, 1, 1);
                 rotateLeft(grid);
-              
+                moveForward(grid);
             }
             ctx.fillStyle = 'red';
             ctx.fillRect(grid.ant.x, grid.ant.y, 1, 1);
